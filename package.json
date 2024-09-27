@@ -79,6 +79,7 @@
     "eslint-plugin-react": "^7.37.0",
     "globals": "^15.9.0",
     "husky": "^9.1.6",
+    "identity-obj-proxy": "^3.0.0",
     "lint-staged": "^15.2.10",
     "sass": "^1.79.3",
     "sass-loader": "^16.0.2",

@@ -13,6 +13,8 @@ const config = {
   moduleDirectories: ["node_modules", "src"],
   testMatch: ["<rootDir>/src/**/*.test.{js,jsx,ts,tsx}"],
   moduleNameMapper: {
+    "\\.(css|scss)$": "identity-obj-proxy",
+    "\\.(gif|jpg|jpeg|png|svg)$": "jest-transform-stub",
     "\\.svg$": "config/jest/svgMock.js",
   },
   transform: {
