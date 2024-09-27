@@ -59,3 +59,6 @@ out/
 # Lock files
 package-lock.json
 yarn.lock
+
+# Infracost
+terraform/.Infracost

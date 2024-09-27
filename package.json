@@ -63,6 +63,7 @@
     ]
   },
   "devDependencies": {
+    "@eslint/js": "^9.11.1",
     "@storybook/addon-a11y": "^8.1.10",
     "@storybook/addon-essentials": "^8.3.2",
     "@storybook/addon-interactions": "^8.1.10",
@@ -74,6 +75,11 @@
     "@storybook/react": "^8.3.2",
     "@storybook/react-webpack5": "^8.3.2",
     "css-loader": "^7.1.2",
+    "eslint": "^9.11.1",
+    "eslint-plugin-react": "^7.37.0",
+    "globals": "^15.9.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "sass": "^1.79.3",
     "sass-loader": "^16.0.2",
     "storybook": "^8.1.10",
@@ -81,6 +87,29 @@
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "typescript-eslint": "^8.7.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.jsx": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.ts": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.tsx": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.css": [
+      "stylelint --fix",
+      "git add"
+    ]
   }
 }
