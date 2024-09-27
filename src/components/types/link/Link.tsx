@@ -24,7 +24,7 @@ export const Link: React.FC<LinkProps> = ({
       target={isExternal ? "_blank" : "_self"}
       rel={isExternal ? "noopener noreferrer" : undefined}
       className={linkClasses}
-      data-qa-id={qaId}
+      data-testid={qaId}
     >
       {children}
       {isExternal && (

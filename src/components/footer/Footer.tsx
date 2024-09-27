@@ -10,7 +10,7 @@ const Footer: React.FC<FooterProps> = ({ className, qaId }) => {
   const footerClasses = classNames(className, styles.footer);
 
   return (
-    <footer className={footerClasses} data-qa-id={qaId}>
+    <footer className={footerClasses} data-testid={qaId}>
       <Text>
         &copy; {new Date().getFullYear()} Mile of Smiles Timing Services. All
         rights reserved.

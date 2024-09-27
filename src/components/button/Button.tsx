@@ -28,7 +28,7 @@ export const Button: React.FC<ButtonProps> = ({
   );
 
   return (
-    <button className={buttonClasses} onClick={onClick} data-qa-id={qaId}>
+    <button className={buttonClasses} onClick={onClick} data-testid={qaId}>
       {icon}
       {children}
     </button>

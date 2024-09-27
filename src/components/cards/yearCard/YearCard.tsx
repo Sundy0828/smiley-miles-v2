@@ -20,7 +20,7 @@ export const YearCard: React.FC<YearCardProps> = ({
   const yearCardClasses = classNames(styles.yearCard, className);
 
   return (
-    <Card className={yearCardClasses} onClick={onClick} data-qa-id={qaId}>
+    <Card className={yearCardClasses} onClick={onClick} data-testid={qaId}>
       <Headline level="2">{year}</Headline>
       <Icon name="ARROW_RIGHT" />
     </Card>

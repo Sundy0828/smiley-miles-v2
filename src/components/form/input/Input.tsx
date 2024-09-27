@@ -21,7 +21,7 @@ export const Input: React.FC<InputProps> = ({
       className={inputClasses}
       placeholder={placeholder}
       onChange={(e) => onChange(e.target.value)}
-      data-qa-id={qaId}
+      data-testid={qaId}
     />
   );
 };

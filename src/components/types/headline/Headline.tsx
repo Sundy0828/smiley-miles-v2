@@ -24,7 +24,7 @@ export const Headline: React.FC<HeadlineProps> = ({
   const Tag = `h${level}` as keyof JSX.IntrinsicElements; // Dynamically choose the tag
 
   return (
-    <Tag className={headlineClasses} data-qa-id={qaId}>
+    <Tag className={headlineClasses} data-testid={qaId}>
       {children}
     </Tag>
   );

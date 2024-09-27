@@ -17,7 +17,7 @@ export const Text: React.FC<TextProps> = ({
   const textClass = classNames(className, styles.text, styles[`text${size}`]);
 
   return (
-    <p data-qa-id={qaId} className={textClass}>
+    <p data-testid={qaId} className={textClass}>
       {children}
     </p>
   );

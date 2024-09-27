@@ -25,7 +25,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
       className={styles.tooltip}
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
-      data-qa-id={qaId}
+      data-testid={qaId}
     >
       {children}
       <div className={tooltipClasses}>{label}</div>

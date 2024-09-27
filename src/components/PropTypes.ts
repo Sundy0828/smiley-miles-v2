@@ -9,7 +9,7 @@ export interface ClassNameProps {
 
 export interface QaIdProps {
   /**
-   * A unique string to target the component in automated tests. Renders as "data-qa-id" attribute in HTML.
+   * A unique string to target the component in automated tests. Renders as "data-testid" attribute in HTML.
    */
   qaId?: string;
 }

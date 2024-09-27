@@ -34,7 +34,7 @@ export const Card: React.FC<CardProps> = ({
       onClick={onClick}
       role="button"
       tabIndex={0}
-      data-qa-id={qaId}
+      data-testid={qaId}
     >
       {children}
     </div>

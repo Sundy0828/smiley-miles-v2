@@ -19,7 +19,7 @@ export const Radio: React.FC<RadioProps> = ({
   const radioClasses = classNames(className, styles.radio);
 
   return (
-    <label className={radioClasses} data-qa-id={qaId}>
+    <label className={radioClasses} data-testid={qaId}>
       <input
         type="radio"
         name={name}

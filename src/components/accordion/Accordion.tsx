@@ -27,7 +27,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   });
 
   return (
-    <div className={styles.accordion} data-qa-id={qaId}>
+    <div className={styles.accordion} data-testid={qaId}>
       <div className={styles.accordion__header} onClick={toggleAccordion}>
         <Headline level="2">{title}</Headline>
         <Icon name={isOpen ? "ARROW_UP" : "ARROW_DOWN"} />

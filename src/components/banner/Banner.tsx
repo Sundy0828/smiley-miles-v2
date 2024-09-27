@@ -48,7 +48,7 @@ export const Banner: React.FC<BannerProps> = ({
   const bannerClasses = classNames(className, styles.banner);
 
   return (
-    <div className={bannerClasses} data-qa-id={qaId}>
+    <div className={bannerClasses} data-testid={qaId}>
       <div className={styles.breadcrumbsContainer}>{buildBreadcrumbs()}</div>
       <div className={styles.content}>
         <div>

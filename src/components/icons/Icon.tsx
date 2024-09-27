@@ -31,7 +31,7 @@ export function Icon({
       aria-label={rest["aria-hidden"] ? undefined : name}
       role="img"
       fillRule="evenodd"
-      data-qa-id={qaId}
+      data-testid={qaId}
       className={iconClasses}
       {...rest}
     >

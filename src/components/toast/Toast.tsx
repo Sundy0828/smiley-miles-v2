@@ -42,7 +42,7 @@ const Toast: React.FC<ToastProps> = ({
   const toastClasses = classNames(className, styles.toast);
 
   return (
-    <div className={toastClasses} data-qa-id={qaId}>
+    <div className={toastClasses} data-testid={qaId}>
       <Button
         className={styles.dismissButton}
         onClick={() => onClose(id)}

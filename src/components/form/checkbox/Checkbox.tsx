@@ -24,7 +24,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         type="checkbox"
         checked={checked}
         onChange={onChange}
-        data-qa-id={qaId}
+        data-testid={qaId}
       />
       {label}
     </label>

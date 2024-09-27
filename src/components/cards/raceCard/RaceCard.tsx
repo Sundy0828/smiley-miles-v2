@@ -30,7 +30,7 @@ export const RaceCard: React.FC<RaceCardProps> = ({
       className={raceCardClasses}
       elevation={2}
       onClick={onClick}
-      data-qa-id={qaId}
+      data-testid={qaId}
     >
       <div>
         <Headline level="3">{title}</Headline>

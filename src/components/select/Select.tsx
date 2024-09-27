@@ -50,7 +50,7 @@ export const Select: React.FC<SelectProps> = ({
   const selectContainerClasses = classNames(className, styles.selectContainer);
 
   return (
-    <div className={selectContainerClasses} data-qa-id={qaId}>
+    <div className={selectContainerClasses} data-testid={qaId}>
       <input
         type="text"
         className={styles.selectSearch}

@@ -23,7 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({ title, className, qaId, pages }) => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <header className={navbarClasses} data-qa-id={qaId}>
+    <header className={navbarClasses} data-testid={qaId}>
       <div className={styles.navbarContent}>
         <Headline level="1" textColor="subtle" className={styles.navTitle}>
           {title}
