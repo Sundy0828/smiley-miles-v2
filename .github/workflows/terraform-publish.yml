@@ -18,21 +18,33 @@ jobs:
         with:
           terraform_version: 1.5.0 # Specify your Terraform version here
 
+      - name: Change Directory to Terraform
+        run: cd terraform
+
       - name: Terraform Init
-        run: terraform init
+        run: |
+          cd terraform
+          terraform init
 
       - name: Terraform Validate
-        run: terraform validate
+        run: |
+          cd terraform
+          terraform validate
 
       - name: Terraform Plan
-        run: terraform plan
+        run: |
+          cd terraform
+          terraform plan
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: |
+          cd terraform
+          terraform apply -auto-approve
         env:
           TF_VAR_some_variable: ${{ secrets.SOME_SECRET }} # Example for passing secrets
 
       - name: Output Terraform State
         run: |
+          cd terraform
           terraform output -json > terraform_output.json
           echo "Terraform output saved to terraform_output.json"
