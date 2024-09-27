@@ -1,11 +1,11 @@
 import React from "react";
 import { Button } from "../Button";
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 
 describe("Button Component", () => {
   it("renders correctly with default props", () => {
     const { getByTestId } = render(
-      <Button onClick={() => {}} data-qa-id="test-button">
+      <Button onClick={() => {}} qaId="test-button">
         Click Me
       </Button>
     );
@@ -18,11 +18,7 @@ describe("Button Component", () => {
 
   it("renders correctly with secondary type", () => {
     const { getByTestId } = render(
-      <Button
-        onClick={() => {}}
-        data-qa-id="test-button"
-        buttonType="secondary"
-      >
+      <Button onClick={() => {}} qaId="test-button" buttonType="secondary">
         Secondary Button
       </Button>
     );
@@ -36,7 +32,7 @@ describe("Button Component", () => {
   it("calls onClick when clicked", () => {
     const handleClick = jest.fn();
     const { getByTestId } = render(
-      <Button onClick={handleClick} data-qa-id="test-button">
+      <Button onClick={handleClick} qaId="test-button">
         Click Me
       </Button>
     );
@@ -49,11 +45,7 @@ describe("Button Component", () => {
 
   it("renders with an icon", () => {
     const { getByTestId } = render(
-      <Button
-        onClick={() => {}}
-        data-qa-id="test-button"
-        icon={<span>🚀</span>}
-      >
+      <Button onClick={() => {}} qaId="test-button" icon={<span>🚀</span>}>
         Icon Button
       </Button>
     );
