@@ -1,16 +1,13 @@
-variable "base_bucket_name" {
-  description = "The base name for the S3 bucket"
-  type        = string
-  default     = "smiley-miles"
-}
-
 locals {
-  unique_bucket_name = "${var.base_bucket_name}-${random_string.bucket_suffix.result}"
-  custom_domain      = "www.mycustomdomain.com" # Change to your custom domain
-  tag_prefix         = "Smiley Miles"
-}
+  app_name = "Smiley Miles"
+  bucket_name = "smiley-miles"
 
-resource "random_string" "bucket_suffix" {
-  length  = 8
-  special = false
+  mime_types = {
+    "html" = "text/html"
+    "css"  = "text/css"
+    "js"   = "application/javascript"
+    "png"  = "image/png"
+    "jpg"  = "image/jpeg"
+    "svg"  = "image/svg+xml"
+  }
 }
