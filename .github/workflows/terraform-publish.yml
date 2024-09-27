@@ -41,7 +41,9 @@ jobs:
           cd terraform
           terraform apply -auto-approve
         env:
-          TF_VAR_some_variable: ${{ secrets.SOME_SECRET }} # Example for passing secrets
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_some_variable: ${{ secrets.SOME_SECRET }} # Example for passing other secrets
 
       - name: Output Terraform State
         run: |
