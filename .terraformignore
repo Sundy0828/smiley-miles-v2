@@ -1,0 +1,20 @@
+# This file is *only* used when running `terraform plan` locally with the CLI. It prevents uploading the majority
+# of excess files, including node_modules directories, to Terraform Cloud to execute the plan. When running in
+# Terraform Cloud from a Git update, the entire repo will still be cloned.
+
+# Diagnose issues with this file with `TF_IGNORE=trace terraform plan`
+# See https://support.hashicorp.com/hc/en-us/articles/4409321668499-How-to-identify-issues-with-the-terraformignore-file-configuration
+
+# It feels like fewer negated paths works more quickly, but removing node_modules directories (see terraform/README.md) makes
+# the biggest difference. Leaving the more granular exclude paths to better align with the Terraform Cloud workspace
+# triggers config, and to require terraform/* files and folders to opt in.
+
+# Ignore everything by default
+*
+
+# Only allow directories with files actually needed by Terraform.
+!/terraform
+
+# This appears to happen by default unless you use negatived paths like above(?). Regardless,
+# it makes a significant difference.
+/terraform/**/.terraform/
