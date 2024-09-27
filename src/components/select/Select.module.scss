@@ -1,0 +1,41 @@
+.selectContainer {
+  position: relative;
+}
+
+.selectSearch {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+}
+
+.selectOptions {
+  position: absolute;
+  width: 100%;
+  max-height: 200px; // Adjust as needed
+  overflow-y: auto;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  background-color: white; // Change as needed
+  z-index: 1000; // Ensure dropdown appears above other elements
+}
+
+.selectOption {
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--grey-light); // Change on hover
+  }
+
+  &.selected {
+    background-color: var(--color-primary); // Selected option color
+    color: var(--white);
+  }
+}
+
+.noOptions {
+  padding: 8px;
+  color: var(--grey);
+  text-align: center;
+}

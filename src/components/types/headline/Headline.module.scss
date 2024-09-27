@@ -1,0 +1,33 @@
+.headline {
+  // Base headline styles
+  color: var(--color-primary);
+  margin: var(--spacing-one) 0;
+}
+
+.subtle {
+  color: var(--color-subtle);
+}
+
+.black {
+  color: var(--color-black);
+}
+
+.white {
+  color: var(--color-white);
+}
+
+.information {
+  color: var(--color-information);
+}
+
+.confirmation {
+  color: var(--color-confirmation);
+}
+
+.warning {
+  color: var(--color-warning);
+}
+
+.critical {
+  color: var(--color-critical);
+}

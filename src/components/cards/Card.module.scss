@@ -1,0 +1,37 @@
+.card {
+  background-color: var(--color-background-accent);
+  border-radius: 0.25rem;
+  padding: 0 1rem;
+  cursor: pointer; // Change cursor to pointer
+  transition:
+    box-shadow 0.3s ease,
+    background-color 0.3s,
+    transform 0.3s;
+}
+
+.card:hover {
+  background-color: var(--color-background-accent2);
+  transform: scale(1.02);
+}
+
+.elevated {
+  box-shadow: var(--shadow-sm);
+}
+
+.outlined {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.elevation1 {
+  box-shadow: var(--shadow-sm);
+}
+
+.elevation2 {
+  box-shadow: var(--shadow-md);
+}
+
+.elevation3 {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Add more elevation levels as needed */

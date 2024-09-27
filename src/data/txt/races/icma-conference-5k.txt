@@ -1,0 +1,120 @@
+Place    Name                              City               Bib No  Age Gend                Time        Pace
+      1    John Mauro                        Port Townsend  WA     155     0   M              16:39.70      5:22/M
+      2    Neal Duncan                                             552    0    M              16:42.31      5:23/M
+      3    Justin Amos                       Gastonia  NC          101     0   M              18:19.20      5:55/M
+      4    Alan Karnofsky                    Washington  DC        143     0   M              19:45.79      6:22/M
+      5    Russell Lagasse                                         577    0    M              19:53.53      6:25/M
+      6    Micah McRea                                             553    0    M              20:07.55      6:29/M
+      7    Jeffrey Dahl                      Wayzata  MN           119     0   M              20:14.41      6:32/M
+      8    Jason Wedel                       Prior Lake  MN        943     0   M              20:34.71      6:38/M
+      9    Miguel Perez                      Santa Paula  CA       169     0   M              21:44.50      7:01/M
+     10    Keagan James                                            554    0    M              22:00.93      7:06/M
+     11    Justin Battles                    Mustang  OK           104     0   M              22:09.23      7:09/M
+     12    Adam Mitchell                     Fuquay Varina  NC     163     0   M              22:16.30      7:11/M
+     13    Eric Marsh                                             2475    0    M              22:38.80      7:18/M
+     14    Thomas Begin                      Whitinsville  MA      106     0   M              22:48.99      7:21/M
+     15    John Williams                     West Linn  OR         947     0   M              22:55.80      7:24/M
+     16    Michael Stallings                 Smithfield  VA        190     0   M              23:19.30      7:31/M
+     17    Morgan Jines                      Plano  TX             141     0   F              23:23.29      7:33/M
+     18    Jeffrey Grant                                          2490    0    M              23:25.52      7:33/M
+     19    Colby Mask                                              559    0    M              23:30.55      7:35/M
+     20    Hazel McNees                                           2487    0    F              23:41.55      7:38/M
+     21    Emily Vincent                     Olathe  KS            197     0   F              23:43.55      7:39/M
+     22    Sam Dalfonso                                           2492    0    M              23:46.50      7:40/M
+     23    Joseph Gacioch                    Ferndale  MI          127     0   M              24:11.76      7:48/M
+     24    Raman Shah                        Providence  RI        184     0   M              24:34.67      7:55/M
+     25    Tom Homan                                              2476    0    M              24:46.48      7:59/M
+     26    John Baumgartner                  League City  TX       105     0   M              25:03.54      8:05/M
+     27    Joanne Keene                                           2480    0    F              25:17.66      8:09/M
+     28    Robert Keehn                      Lake City  MN         144     0   M              25:19.88      8:10/M
+     29    Lindsay Radcliff-Coombes          Severance  CO         171     0   F              25:33.54      8:15/M
+     30    Keagan Huynh                                            565    0    M              25:35.72      8:15/M
+     31    Jeanna Troha                                           2474    0    F              25:36.30      8:15/M
+     32    Alexis Brown                      Malibu  CA            111     0   F              25:37.95      8:16/M
+     33    Rolando Fernandez                 Buda  TX              124     0   M              25:41.55      8:17/M
+     34    Ryan McLane                                             107     0   M              26:01.45      8:24/M
+     35    Mali LaGoe                        Scotts Valley  CA     146     0   F              26:04.55      8:25/M
+     36    Weston Young                      Snow Hill  MD         949     0   M              26:07.55      8:25/M
+     37    Frederick Presley                 Wethersfield  CT      170     0   M              26:36.55      8:35/M
+     38    Charles Romboletti                South Hadley  MA      177     0   M              26:41.62      8:36/M
+     39    Paul Rosen                        Minneola  FL          180     0   M              26:44.26      8:37/M
+     40    James Malloy                      Lexington  MA         152     0   M              26:50.55      8:39/M
+     41    Jessica Cadiente                  Santa Barbara  CA     112     0   F              27:24.45      8:50/M
+     42    Matthew Sturgis                   Cumberland  ME        192     0   M              27:25.56      8:51/M
+     43    Scott Hildebran                   Lenoir  NC            136     0   M              27:26.55      8:51/M
+     44    Ryan Jeroski                      Allison Park  PA      140     0   M              27:29.96      8:52/M
+     45    Michael Graese                    Ashland  KY           131     0   M              27:55.72      9:00/M
+     46    William Tinsley                   Thomaston  GA         194     0   M              28:16.43      9:07/M
+     47    Jorge Godinez                     Long Beach  CA        130     0   M              28:42.80      9:15/M
+     48    Martin Moreno                     Phoenix  AZ           164     0   M              29:03.48      9:22/M
+     49    Janis Lange                                            2482    0    F              29:07.54      9:24/M
+     50    Joseph Cisneros                                         558    0    M              30:03.30      9:42/M
+     51    Melisa Caughman                   Columbia  SC          114     0   F              30:12.25      9:45/M
+     52    Anna Guiles                       Fairfield  CA         132     0   F              30:34.73      9:52/M
+     53    Gavin Morgan                                            567    0    M              30:53.55      9:58/M
+     54    Rebecca Bernstorff                                      573    0    F              30:57.57      9:59/M
+     55    James Clifford                                         2486    0    M              31:04.30     10:01/M
+     56    Scott Lambiase                    Abington  MA          148     0   M              31:15.77     10:05/M
+     57    Rick Howell                                            2484    0    M              31:21.63     10:07/M
+     58    John Connet                       Hendersonville  NC    116     0   M              31:21.80     10:07/M
+     59    Ashley Wehr                       Olathe  KS            944     0   F              32:34.62     10:30/M
+     60    Amy Crouse                                              544    0    F              32:35.28     10:31/M
+     61    Stephanie Rice                    San Antonio  TX       174     0   F              32:46.43     10:34/M
+     62    Steve Volkert                     Hartford  WI          198     0   M              32:50.49     10:35/M
+     63    Trish Reardon                                          2496    0    F              33:50.14     10:55/M
+     64    Catherine Givens                  Coral Springs  FL     129     0   F              34:10.83     11:01/M
+     65    David Gragan                                           2495    0    M              34:12.47     11:02/M
+     66    Nathan Mai-Lombardo               Berkeley  MO          151     0   M              34:14.89     11:03/M
+     67    D. Whitley                        Fredericksburg  VA    945     0   M              34:49.59     11:14/M
+     68    Julie Crookston                   Salt Lake City  UT    118     0   F              35:12.51     11:21/M
+     69    Laura McCoy                       Fort Lauderdale  FL   157     0   F              35:26.51     11:26/M
+     70    Kimiko Black Gilmore              Kansas City  MO       108     0   M              35:42.52     11:31/M
+     71    Troy Bell                                              2497    0    M              36:14.98     11:41/M
+     72    Patrick Rondinelli                Ouray  CO             178     0   M              36:23.28     11:44/M
+     73    Kevin Icard                       Bluffton  SC          137     0   M              36:36.67     11:48/M
+     74    Jessica Rhue                      New Bern  NC          173     0   F              36:36.67     11:48/M
+     75    Molly Harlow                      Charlottesville  VA   133     0   F              36:39.72     11:49/M
+     76    Melissa Marsh                     Madison Heights  MI   154     0   F              36:45.61     11:51/M
+     77    Letha Crandall                                         2477    0    F              36:49.56     11:53/M
+     78    Jason Horton                                           2488    0    M              36:52.53     11:54/M
+     79    Michael McLaurin                  Indian Trail  NC      159     0   M              36:52.74     11:54/M
+     80    Sharon Stott                      Saint Louis  MO       191     0   F              36:56.21     11:55/M
+     81    Sarah Bagley                      Alexandria  VA        103     0   F              37:46.64     12:11/M
+     82    I made Wahyu Wijaya                                     539    0    M              38:50.32     12:32/M
+     83    Robert Quintero                                        2498    0    M              40:25.31     13:02/M
+     84    Rafaela Diaz                                           2479    0    F              40:28.81     13:03/M
+     85    Teresa De Castro                  Decatur  GA           121     0   F              40:41.78     13:07/M
+     86    William Peppers                   Canton  GA            168     0   M              40:42.31     13:08/M
+     87    Jessica Wildes                    West Bend  WI         946     0   F              41:38.64     13:26/M
+     88    Dawn Wagner                       Saukville  WI         199     0   F              41:39.46     13:26/M
+     89    Amanda Sleigh                     Dowagiac  MI          188     0   F              42:37.22     13:45/M
+     90    Craig Wehr                                              534    0    M              43:14.66     13:57/M
+     91    Emilie LaGrow                     Cassopolis  MI        147     0   F              43:24.67     14:00/M
+     92    Wayne Bush                                             2473    0    M              43:24.68     14:00/M
+     93    Ellizabeth Rosenbaum              Sugar Land  TX        181     0   F              43:28.97     14:01/M
+     94    Jennifer Balock                                        2489    0    F              43:33.80     14:03/M
+     95    Shana Davis-Cook                  Chevy Chase  MD       120     0   F              43:44.56     14:06/M
+     96    Joseph Mazzola                                          570    0    M              43:56.21     14:10/M
+     97    Laura Mazzola                                           569    0    F              43:56.56     14:10/M
+     98    Catherine McLauren                                     2493    0    F              44:19.53     14:18/M
+     99    Destiny Dominquez                                      2472    0    F              44:44.56     14:26/M
+    100    Brian Sco                                              2481    0    M              44:44.65     14:26/M
+
+                                                                                                 Total
+    Place    Name                              City               Bib No  Age Gend                Time        Pace
+    101    Kendall Ingram                    Plano  TX             139     0   F              45:01.66     14:31/M
+    102    Dani McArthur                     Plano  TX             156     0   F              45:01.67     14:31/M
+    103    Harold Taylor                                          2491    0    M              45:14.72     14:35/M
+    104    Lacy Lewis                        Sammamish  WA         150     0   F              45:36.44     14:43/M
+    105    Rickey Childers                   Washington  DC        115     0   M              46:25.67     14:58/M
+    106    Crandall Jones                    Upper Darby  PA       142     0   M              46:58.56     15:09/M
+    107    Timothy Rooney                    Mustang  OK           179     0   M              47:34.55     15:21/M
+    108    Sue Taylor                                             2470    0    F              49:39.68     16:01/M
+    109    Russell Taylor                    Saginaw  MI           193     0   M              49:40.55     16:01/M
+    110    Diana Garcia                                           2478    0    F              49:43.79     16:02/M
+    111    Ron Bow                           La Habra  CA          110     0   M              49:43.99     16:02/M
+    112    Roger Morris                      Bristol  ENG          165     0   M              55:04.30     17:46/M
+    113    Erin Reynolds                     Florence  OR          172     0   F              55:55.63     18:02/M
+    114    Megan Messmer                     Florence  OR          162     0   F              55:56.47     18:03/M
+    115    Debbie Manns                      New Port Richey  FL   153     0   F              56:33.80     18:15/M
+    116    Adrienne Gardner                  Norfolk  VA           128     0   F              56:34.70     18:15/M

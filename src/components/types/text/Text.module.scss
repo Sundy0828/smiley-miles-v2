@@ -1,0 +1,20 @@
+.text {
+  color: var(--color-text);
+
+  &.textMicro {
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+  &.textSmall {
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+  &.textDefault {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  &.textLarge {
+    font-size: 1.125rem;
+    line-height: 1.8;
+  }
+}

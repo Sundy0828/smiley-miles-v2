@@ -1,0 +1,40 @@
+/* Accordion.module.scss */
+.accordion {
+  background-color: var(--color-background-accent); /* Dark background */
+  border: none;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.accordion__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: var(--color-background-accent);
+}
+
+.accordion__header:hover {
+  background-color: var(--color-background-accent2);
+}
+
+.accordion__content {
+  padding: 1rem;
+  background-color: var(--color-background-accent);
+  display: none; /* Hidden by default */
+}
+
+.accordion__content.show {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.accordion__icon {
+  transition: transform 0.3s ease;
+}
+
+.accordion__icon.rotate {
+  transform: rotate(180deg); /* Rotate the icon when the accordion is open */
+}
