@@ -1,5 +1,8 @@
 # Smiley Miles V2
 
+[![Coverage Status](https://coveralls.io/repos/github/yourusername/yourrepository/badge.svg?branch=master)](https://coveralls.io/github/yourusername/yourrepository?branch=master)
+[![Build Status](https://img.shields.io/travis/yourusername/yourrepository/master.svg)](https://travis-ci.org/yourusername/yourrepository)
+
 Welcome to the Smiley Miles V2 project! This is a React application designed for [brief description of your project].
 
 ## Table of Contents
