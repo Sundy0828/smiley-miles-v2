@@ -33,9 +33,8 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-  build:
+  common-steps:
     runs-on: ubuntu-latest
-    needs: setup
 
     steps:
       - name: Checkout code
@@ -47,17 +46,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+  build:
+    runs-on: ubuntu-latest
+    needs: [setup, common-steps]
+
+    steps:
       - name: Build React app
         run: pnpm build # Assumes you have a build script in package.json
 
   terraform:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build, common-steps]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2.0.0
         with:
@@ -91,27 +92,17 @@ jobs:
 
   tests:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build, common-steps]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Install dependencies
-        run: pnpm install
-
       - name: Run tests with coverage
         run: pnpm test:ci
 
   codecov:
     runs-on: ubuntu-latest
-    needs: [build, tests]
+    needs: [tests, common-steps]
 
     steps:
-      # Step 1: Upload coverage to Codecov
       - name: Upload coverage to Codecov
         run: pnpm exec codecov -f ./coverage/lcov.info
         env:
@@ -119,17 +110,8 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [build, tests]
+    needs: [tests, common-steps]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Install dependencies
-        run: pnpm install
-
       - name: Deploy React build to AWS
         run: pnpm run deploy # Adjust according to your deployment script
