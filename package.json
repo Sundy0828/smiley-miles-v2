@@ -3,15 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@storybook/addon-actions": "^8.3.2",
-    "@storybook/addon-links": "^8.3.2",
-    "@storybook/addon-webpack5-compiler-babel": "^3.0.3",
-    "@storybook/cli": "^8.3.2",
-    "@storybook/preview-api": "^8.3.2",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/node": "^16.18.108",
-    "@types/react": "^18.3.8",
+    "@storybook/addon-actions": "^8.3.4",
+    "@storybook/addon-links": "^8.3.4",
+    "@storybook/cli": "^8.3.4",
+    "@storybook/preview-api": "^8.3.4",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/node": "^22.7.4",
+    "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.7.7",
@@ -28,7 +27,7 @@
     "resize-observer-polyfill": "^1.5.1",
     "rimraf": "^6.0.1",
     "ts-jest": "^29.2.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^4.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -42,13 +41,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "nuke": "pnpm run clean && rimraf node_modules",
-    "convert-data:json": "ts-node ./src/data/parseYears.ts"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "convert-data:json": "ts-node ./src/data/parseYears.ts",
+    "tsc": "tsc"
   },
   "browserslist": {
     "production": [
@@ -64,34 +58,34 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
-    "@storybook/addon-a11y": "^8.1.10",
-    "@storybook/addon-essentials": "^8.3.2",
-    "@storybook/addon-interactions": "^8.1.10",
-    "@storybook/addon-styling-webpack": "^1.0.0",
-    "@storybook/builder-webpack5": "^8.3.2",
-    "@storybook/manager-webpack5": "^6.5.16",
-    "@storybook/preset-create-react-app": "^8.3.2",
+    "@storybook/addon-a11y": "^8.3.4",
+    "@storybook/addon-essentials": "^8.3.4",
+    "@storybook/addon-interactions": "^8.3.4",
+    "@storybook/preset-create-react-app": "^8.3.4",
     "@storybook/preset-typescript": "^3.0.0",
-    "@storybook/react": "^8.3.2",
-    "@storybook/react-webpack5": "^8.3.2",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@types/jest": "^27.5.2",
+    "@storybook/react": "^8.3.4",
+    "@storybook/react-webpack5": "^8.3.4",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@types/jest": "^29.5.13",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
     "codecov": "^3.8.3",
     "css-loader": "^7.1.2",
-    "eslint": "^9.11.1",
+    "eslint": "^8.57.1",
     "eslint-plugin-react": "^7.37.0",
+    "eslint-webpack-plugin": "2.6.0",
     "globals": "^15.9.0",
     "husky": "^9.1.6",
     "identity-obj-proxy": "^3.0.0",
     "lint-staged": "^15.2.10",
-    "sass": "^1.79.3",
+    "sass": "^1.79.4",
     "sass-loader": "^16.0.2",
-    "storybook": "^8.1.10",
+    "storybook": "^8.3.4",
     "storybook-dark-mode": "^4.0.2",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
-    "typescript": "^4.9.5",
+    "typescript": "^5.6.2",
     "typescript-eslint": "^8.7.0"
   },
   "lint-staged": {

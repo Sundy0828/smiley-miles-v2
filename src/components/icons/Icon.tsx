@@ -1,21 +1,17 @@
-import React, { AriaAttributes, ReactNode } from "react";
-import { ClassNameProps, QaIdProps, Size } from "../PropTypes";
 import classNames from "classnames";
+import React, { AriaAttributes } from "react";
+import { ClassNameProps, QaIdProps, Size } from "../PropTypes";
 import styles from "./Icon.module.scss";
 import IconEnum from "./IconEnum";
 
 export interface IconProps extends AriaAttributes, ClassNameProps, QaIdProps {
-  children?: ReactNode;
   viewBox?: string;
-  title?: string;
   size?: Size; // Add size prop
   name: keyof typeof IconEnum;
 }
 
 export function Icon({
-  children,
   viewBox = "0 -960 960 960",
-  title,
   className,
   qaId,
   size = "default",

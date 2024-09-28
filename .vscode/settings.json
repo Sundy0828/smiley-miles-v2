@@ -1,0 +1,29 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.organizeImports": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.format.enable": true,
+  "typescript.validate.enable": true,
+  "javascript.validate.enable": true,
+  "eslint.alwaysShowRuleFailuresAsWarnings": false,
+  "eslint.options": {
+    "overrideConfigFile": ".eslintrc.js"
+  },
+  "files.autoSave": "onWindowChange",
+  "files.associations": {
+    "*.tsx": "typescriptreact",
+    "*.ts": "typescript",
+    "*.js": "javascript"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.requireConfig": true,
+  "editor.formatOnPaste": true,
+  "git.ignoreLimitWarning": true,
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.iconTheme": "vscode-icons"
+}

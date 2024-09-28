@@ -3,13 +3,13 @@ const config = {
   preset: "ts-jest",
   testEnvironment: "jsdom",
   collectCoverageFrom: [
-    "src/**/*.{js,jsx,ts,tsx}",
+    "src/**/*.test.{js,jsx,ts,tsx}",
     "!**/node_modules/**",
     "!**/__test__/**",
     "!**/*.stories.tsx",
     "!**/*.d.ts",
   ],
-  setupFiles: ["react-app-polyfill/jsdom"],
+  setupFiles: ["<rootDir>/src/setupTests.ts", "react-app-polyfill/jsdom"],
   moduleDirectories: ["node_modules", "src"],
   testMatch: ["<rootDir>/src/**/*.test.{js,jsx,ts,tsx}"],
   moduleNameMapper: {

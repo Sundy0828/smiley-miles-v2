@@ -1,7 +1,7 @@
 import React from "react";
+import { Accordion } from "../../components/accordion/Accordion";
 import { useBanner } from "../../components/banner/BannerContext";
 import { Headline, Text } from "../../components/types";
-import { Accordion } from "../../components/accordion/Accordion";
 import styles from "./Notes.module.scss";
 
 interface Quote {
@@ -102,16 +102,16 @@ const Notes = () => {
       <Headline level="1">Quotes</Headline>
       {quotes.map((quote) => (
         <Accordion key={quote.author} title={quote.author}>
-          <Text>"{quote.text}"</Text>
+          <Text>&quot;{quote.text}&quot;</Text>
         </Accordion>
       ))}
 
       <Headline level="1">Narratives</Headline>
-      {narratives.map((narrative) => (
-        <div>
+      {narratives.map((narrative, index) => (
+        <div key={`${narrative.author.toLowerCase().replace(/\s+/g, '-')}-${index}`}>
           <Accordion key={narrative.author} title={narrative.author}>
             {narrative.paragraphs.map((paragraph) => (
-              <Text>"{paragraph}"</Text>
+              <Text  key={`${index}`}>&quot;{paragraph}&quot;</Text>
             ))}
           </Accordion>
         </div>
