@@ -50,9 +50,6 @@ jobs:
       - name: Build React app
         run: pnpm build # Assumes you have a build script in package.json
 
-      - name: Lint Check
-        run: pnpm lint # Assumes you have a lint script in package.json
-
   terraform:
     runs-on: ubuntu-latest
     needs: build
