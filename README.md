@@ -1,7 +1,7 @@
 # Smiley Miles V2
 
-[![Coverage Status](https://coveralls.io/repos/github/yourusername/yourrepository/badge.svg?branch=master)](https://coveralls.io/github/yourusername/yourrepository?branch=master)
-[![Build Status](https://img.shields.io/travis/yourusername/yourrepository/master.svg)](https://travis-ci.org/yourusername/yourrepository)
+[![Coverage Status](https://coveralls.io/repos/github/Sundy0828/smiley-miles-v2/badge.svg?branch=master)](https://coveralls.io/github/Sundy0828/smiley-miles-v2?branch=master)
+[![Build Status](https://img.shields.io/travis/Sundy0828/smiley-miles-v2/master.svg)](https://travis-ci.org/Sundy0828/smiley-miles-v2)
 
 Welcome to the Smiley Miles V2 project! This is a React application designed for [brief description of your project].
 
