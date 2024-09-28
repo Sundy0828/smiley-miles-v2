@@ -1,20 +1,16 @@
+# Replace aws_s3_bucket with aws_s3_bucket_website
 resource "aws_s3_bucket" "react_website" {
   bucket = "${local.bucket_name}-bucket"
-  acl    = "public-read"
-
-  website {
-    index_document = "index.html"
-    error_document = "index.html"
-  }
 }
 
-resource "aws_s3_bucket_object" "react_files" {
+# Replace aws_s3_bucket_object with aws_s3_object
+resource "aws_s3_object" "react_files" {
   for_each = fileset("${path.module}/build", "**")
 
-  bucket = aws_s3_bucket.react_website.bucket
-  key    = each.key
-  source = "${path.module}/build/${each.key}"
-  etag   = filemd5("${path.module}/build/${each.key}")
+  bucket       = aws_s3_bucket.react_website.id  # Use the bucket ID
+  key          = each.key
+  source       = "${path.module}/build/${each.key}"
+  etag         = filemd5("${path.module}/build/${each.key}")
   content_type = lookup(local.mime_types, each.key, "application/octet-stream")
 }
 
@@ -29,7 +25,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   }
 
   enabled             = true
-  is_ipv6_enabled      = true
+  is_ipv6_enabled     = true
   default_root_object = "index.html"
 
   default_cache_behavior {
