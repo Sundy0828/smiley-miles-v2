@@ -38,7 +38,7 @@ jobs:
 
       # Step 6: Run tests with coverage using pnpm
       - name: Run tests with coverage
-        run: pnpm run test -- --coverage
+        run: pnpm test:ci
 
       # Step 7: Upload coverage to Codecov
       - name: Upload coverage to Codecov
