@@ -38,19 +38,18 @@ jobs:
     needs: setup
 
     steps:
-      # Step 1: Install pnpm
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Install pnpm
         run: npm install -g pnpm
 
-      # Step 2: Install dependencies
       - name: Install dependencies
         run: pnpm install
 
-      # Step 3: Build React app
       - name: Build React app
         run: pnpm run build # Assumes you have a build script in package.json
 
-      # Step 4: Lint Check
       - name: Lint Check
         run: pnpm run lint # Assumes you have a lint script in package.json
 
@@ -98,15 +97,15 @@ jobs:
     needs: build
 
     steps:
-      # Step 1: Install pnpm
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Install pnpm
         run: npm install -g pnpm
 
-      # Step 2: Install dependencies
       - name: Install dependencies
         run: pnpm install
 
-      # Step 3: Run tests with coverage using pnpm
       - name: Run tests with coverage
         run: pnpm test:ci
 
@@ -126,14 +125,14 @@ jobs:
     needs: [build, tests]
 
     steps:
-      # Step 1: Install pnpm
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Install pnpm
         run: npm install -g pnpm
 
-      # Step 2: Install dependencies
       - name: Install dependencies
         run: pnpm install
 
-      # Step 3: Deploy React build to AWS (Assuming you have a deploy script in package.json)
       - name: Deploy React build to AWS
         run: pnpm run deploy # Adjust according to your deployment script
