@@ -43,6 +43,7 @@ Here are the scripts available in this project:
 - `clean`: Cleans the build, node_modules/.cache, and storybook-static directories.
 - `build:storybook`: Builds the Storybook application.
 - `test`: Runs the test suite.
+- `test:ci`: Runs the test suite with coverage.
 - `eject`: Ejects the configuration (only if you need to customize the setup).
 - `storybook`: Starts the Storybook development server on port 6006.
 - `lint`: Runs ESLint to check for linting errors.
