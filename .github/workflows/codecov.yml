@@ -1,0 +1,47 @@
+name: Upload Coverage to Codecov
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  codecov:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Read Node.js version from .nvmrc
+      - name: Read Node.js version from .nvmrc
+        id: nvmrc
+        run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_ENV
+
+      # Step 3: Set up Node.js using version from .nvmrc
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      # Step 4: Install pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # Step 5: Install dependencies using pnpm
+      - name: Install dependencies
+        run: pnpm install
+
+      # Step 6: Run tests with coverage using pnpm
+      - name: Run tests with coverage
+        run: pnpm run test -- --coverage
+
+      # Step 7: Upload coverage to Codecov
+      - name: Upload coverage to Codecov
+        run: pnpm exec codecov -f ./coverage/lcov.info
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
