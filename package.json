@@ -76,6 +76,7 @@
     "@storybook/react-webpack5": "^8.3.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@types/jest": "^27.5.2",
+    "codecov": "^3.8.3",
     "css-loader": "^7.1.2",
     "eslint": "^9.11.1",
     "eslint-plugin-react": "^7.37.0",
