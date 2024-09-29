@@ -89,6 +89,13 @@ jobs:
         working-directory: ./terraform
         run: terraform apply -auto-approve
 
+      - name: Capture Terraform Outputs
+        working-directory: ./terraform
+        id: terraform_output
+        run: |
+          echo "bucket_name=$(terraform output -raw bucket_name)" >> $GITHUB_ENV
+          echo "cloudfront_url=$(terraform output -raw cloudfront_url)" >> $GITHUB_ENV
+
       - name: Output Terraform State
         working-directory: ./terraform
         run: |
@@ -145,5 +152,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Deploy React build to AWS
-        run: pnpm run deploy # Adjust according to your deployment script
+      - name: Deploy React build to S3
+        run: |
+          aws s3 sync ./build s3://$bucket_name --delete
+          aws cloudfront create-invalidation --distribution-id $cloudfront_url --paths "/*"
+
