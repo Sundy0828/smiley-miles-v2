@@ -2,15 +2,22 @@ data "external" "check_bucket_exists" {
   program = ["bash", "-c", "aws s3 ls ${local.bucket_name}-bucket > /dev/null 2>&1 && echo -n '{\"result\":\"yes\"}' || echo -n '{\"result\":\"no\"}'"]
 }
 
+resource "null_resource" "delete_existing_bucket" {
+  count = data.external.check_bucket_exists.result == "yes" ? 1 : 0
+
+  provisioner "local-exec" {
+    command = "aws s3 rb s3://${local.bucket_name}-bucket --force"
+  }
+}
+
 resource "aws_s3_bucket" "react_website" {
-  count  = data.external.check_bucket_exists.result == "yes" ? 0 : 1 # Create bucket only if it doesn't exist
   bucket = "${local.bucket_name}-bucket"
 }
 
 resource "aws_s3_object" "react_files" {
   for_each = fileset("${path.module}/build", "**")
 
-  bucket       = aws_s3_bucket.react_website[0].id # Update to access the bucket via index
+  bucket       = aws_s3_bucket.react_website.id
   key          = each.key
   source       = "${path.module}/build/${each.key}"
   etag         = filemd5("${path.module}/build/${each.key}")
@@ -23,7 +30,7 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
-    domain_name = aws_s3_bucket.react_website[0].bucket_regional_domain_name # Update to access the bucket via index
+    domain_name = aws_s3_bucket.react_website.bucket_regional_domain_name
     origin_id   = "S3-${local.bucket_name}-bucket"
 
     s3_origin_config {
@@ -67,7 +74,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 }
 
 output "bucket_name" {
-  value      = aws_s3_bucket.react_website[0].bucket
+  value      = aws_s3_bucket.react_website.bucket
   depends_on = [aws_s3_bucket.react_website]
 }
 
