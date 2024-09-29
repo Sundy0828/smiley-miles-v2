@@ -1,38 +1,24 @@
-# Check if S3 bucket already exists
-data "aws_s3_bucket" "existing_bucket" {
-  bucket = "${local.bucket_name}-bucket"
-}
-
-# Only create the S3 bucket if it doesn't already exist
 resource "aws_s3_bucket" "react_website" {
   bucket = "${local.bucket_name}-bucket"
-
-  # Prevent bucket creation if it already exists
-  lifecycle {
-    prevent_destroy = true
-  }
-
-  # Only create bucket if it's not found in the existing data lookup
-  count = length(data.aws_s3_bucket.existing_bucket.id) == 0 ? 1 : 0
 }
 
-# Upload files to the bucket, but only if it was created
 resource "aws_s3_object" "react_files" {
   for_each = fileset("${path.module}/build", "**")
 
-  bucket       = aws_s3_bucket.react_website[0].id # Reference the created bucket
+  bucket       = aws_s3_bucket.react_website.id
   key          = each.key
   source       = "${path.module}/build/${each.key}"
   etag         = filemd5("${path.module}/build/${each.key}")
   content_type = lookup(local.mime_types, each.key, "application/octet-stream")
+}
 
-  # Upload objects only if the S3 bucket exists
-  depends_on = [aws_s3_bucket.react_website]
+resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
+  comment = "OAI for ${local.app_name}"
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
-    domain_name = aws_s3_bucket.react_website[0].bucket_regional_domain_name
+    domain_name = aws_s3_bucket.react_website.bucket_regional_domain_name
     origin_id   = "S3-${local.bucket_name}-bucket"
 
     s3_origin_config {
@@ -73,17 +59,10 @@ resource "aws_cloudfront_distribution" "cdn" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
-
-  # Only create CloudFront distribution if the bucket is created
-  depends_on = [aws_s3_bucket.react_website]
-}
-
-resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
-  comment = "OAI for ${local.app_name}"
 }
 
 output "bucket_name" {
-  value      = aws_s3_bucket.react_website[0].bucket
+  value      = aws_s3_bucket.react_website.bucket
   depends_on = [aws_s3_bucket.react_website]
 }
 
@@ -91,4 +70,3 @@ output "cloudfront_url" {
   value      = aws_cloudfront_distribution.cdn.domain_name
   depends_on = [aws_cloudfront_distribution.cdn]
 }
-
