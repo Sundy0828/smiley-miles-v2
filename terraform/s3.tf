@@ -89,5 +89,6 @@ output "bucket_name" {
 
 output "cloudfront_url" {
   value      = aws_cloudfront_distribution.cdn.domain_name
-  depends_on = [aws_cloudfront_distribution]
+  depends_on = [aws_cloudfront_distribution.cdn]
 }
+
