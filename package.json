@@ -42,7 +42,8 @@
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "nuke": "pnpm run clean && rimraf node_modules",
     "convert-data:json": "ts-node ./src/data/parseYears.ts",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "format:tf": "terraform fmt -recursive ./terraform"
   },
   "browserslist": {
     "production": [
@@ -78,6 +79,7 @@
     "husky": "^9.1.6",
     "identity-obj-proxy": "^3.0.0",
     "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
     "sass": "^1.79.4",
     "sass-loader": "^16.0.2",
     "storybook": "^8.3.4",

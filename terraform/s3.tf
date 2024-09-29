@@ -7,7 +7,7 @@ resource "aws_s3_bucket" "react_website" {
 resource "aws_s3_object" "react_files" {
   for_each = fileset("${path.module}/build", "**")
 
-  bucket       = aws_s3_bucket.react_website.id  # Use the bucket ID
+  bucket       = aws_s3_bucket.react_website.id # Use the bucket ID
   key          = each.key
   source       = "${path.module}/build/${each.key}"
   etag         = filemd5("${path.module}/build/${each.key}")

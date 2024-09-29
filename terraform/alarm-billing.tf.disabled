@@ -1,0 +1,85 @@
+# CloudWatch Alarm for Billing (High Resolution)
+resource "aws_cloudwatch_metric_alarm" "billing_alarm" {
+  alarm_name          = "${local.bucket_name}-billing-alarm"
+  comparison_operator = "GreaterThanThreshold"
+  metric_name         = "EstimatedCharges"
+  namespace           = "AWS/Billing"
+  period              = 60 # 1 minute period for high resolution (set to the minimum possible)
+  statistic           = "Maximum"
+  threshold           = 10.0 # Set your cost threshold here (in USD)
+  alarm_description   = "Alarm when billing exceeds $10"
+  treat_missing_data  = "notBreaching" # Prevent false positives if data is missing
+
+  dimensions = {
+    Currency = "USD"
+  }
+
+  alarm_actions = [aws_sns_topic.alerts.arn] # Free SNS notifications
+
+  # This enables high-resolution
+  evaluation_periods  = 1
+  datapoints_to_alarm = 1
+}
+
+
+# SNS Topic for Alarm Notifications
+resource "aws_sns_topic" "alerts" {
+  name = "${local.bucket_name}-alerts"
+}
+
+# Lambda Function to Shut Down Resources
+resource "aws_lambda_function" "shutdown_function" {
+  filename      = "shutdown_function.zip" # Path to your ZIP file containing the Lambda code
+  function_name = "shutdownResources"
+  handler       = "shutdown_function.handler"
+  runtime       = "python3.8" # Use appropriate runtime (Python 3.8 is in Free Tier)
+  role          = aws_iam_role.lambda_exec.arn
+  timeout       = 30 # Free tier should cover this compute time
+
+  environment {
+    variables = {
+      S3_BUCKET_NAME = aws_s3_bucket.react_website.bucket
+      CLOUDFRONT_ID  = aws_cloudfront_distribution.cdn.id
+    }
+  }
+
+  source_code_hash = filebase64sha256("shutdown_function.zip") # Ensure the hash changes when you update code
+}
+
+# IAM Role for Lambda Function (No cost associated with IAM roles)
+resource "aws_iam_role" "lambda_exec" {
+  name               = "lambda_exec_role"
+  assume_role_policy = data.aws_iam_policy_document.lambda_assume_role_policy.json
+}
+
+data "aws_iam_policy_document" "lambda_assume_role_policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+  }
+}
+
+# Policy to allow Lambda to manage S3 and CloudFront
+resource "aws_iam_role_policy" "lambda_policy" {
+  name = "lambda_policy"
+  role = aws_iam_role.lambda_exec.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "s3:DeleteBucket",
+          "s3:DeleteObject",
+          "cloudfront:DeleteDistribution",
+          "cloudfront:CreateInvalidation"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      }
+    ]
+  })
+}

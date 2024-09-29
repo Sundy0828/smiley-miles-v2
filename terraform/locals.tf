@@ -1,5 +1,5 @@
 locals {
-  app_name = "Smiley Miles"
+  app_name    = "Smiley Miles"
   bucket_name = "smiley-miles"
 
   mime_types = {

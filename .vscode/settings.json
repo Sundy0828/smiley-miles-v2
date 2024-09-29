@@ -25,5 +25,8 @@
   "editor.formatOnPaste": true,
   "git.ignoreLimitWarning": true,
   "workbench.colorTheme": "Default Dark+",
-  "workbench.iconTheme": "vscode-icons"
+  "workbench.iconTheme": "vscode-icons",
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  }
 }
