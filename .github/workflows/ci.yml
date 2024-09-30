@@ -77,17 +77,14 @@ jobs:
 
       - name: Terraform Apply
         working-directory: ./terraform
-        id: terraform_output
-        run: |
-          terraform apply -auto-approve
-          echo "bucket_name=$(terraform output -raw bucket_name)" >> $GITHUB_ENV
-          echo "cloudfront_id=$(terraform output -raw cloudfront_id)" >> $GITHUB_ENV
+        run: terraform apply -auto-approve
 
-      - name: Output Terraform State
-        working-directory: ./terraform
-        run: |
-          terraform output -json > terraform_output.json
-          echo "Terraform output saved to terraform_output.json"
+      # - name: Capture Terraform Outputs
+      #   working-directory: ./terraform
+      #   id: terraform_output
+      #   run: |
+      #     echo "bucket_name=$(terraform output -raw bucket_name)" >> $GITHUB_ENV
+      #     echo "cloudfront_id=$(terraform output -raw cloudfront_id)" >> $GITHUB_ENV
 
   tests:
     runs-on: ubuntu-latest
@@ -141,6 +138,6 @@ jobs:
 
       - name: Deploy React build to S3
         run: |
-          aws s3 sync ./build s3://$bucket_name --delete
-          aws cloudfront create-invalidation --distribution-id $cloudfront_id --paths "/*"
+          aws s3 sync ./build s3://smiley-miles-bucket --delete
+          aws cloudfront create-invalidation --distribution-id E3SYRWPUCCVQ74 --paths "/*"
 
