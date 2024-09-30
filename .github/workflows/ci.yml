@@ -144,8 +144,8 @@ jobs:
       - name: Install AWS CLI
         run: pip install awscli
 
-      - name: Check Build Directory
-        run: ls -la ./build
+      - name: Build React app
+        run: pnpm build # Assumes you have a build script in package.json
 
       - name: Deploy React build to S3
         run: |
