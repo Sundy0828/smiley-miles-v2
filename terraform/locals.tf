@@ -1,6 +1,8 @@
 locals {
   app_name    = "Smiley Miles"
-  bucket_name = "smiley-miles"
+  branch_name = var.branch_name != "" ? var.branch_name : "master"
+  bucket_name = "${local.branch_name}-smiley-miles"
+
 
   mime_types = {
     "html" = "text/html"
@@ -10,4 +12,11 @@ locals {
     "jpg"  = "image/jpeg"
     "svg"  = "image/svg+xml"
   }
+}
+
+# Define the variable
+variable "branch_name" {
+  type        = string
+  description = "The name of the branch being deployed."
+  default     = "" # Default can be set to an empty string
 }
