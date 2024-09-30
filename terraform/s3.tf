@@ -3,7 +3,7 @@ data "aws_s3_bucket" "existing_bucket" {
 }
 
 data "aws_cloudfront_distribution" "existing_distribution" {
-  id = "E3SYRWPUCCVQ74"
+  id = "E3SYRWPUCCVQ74" // replace this with a function to get the id of the existing distribution connected to the bucket
 }
 
 resource "aws_s3_bucket" "react_website" {
@@ -32,6 +32,8 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
+  count = length(data.aws_cloudfront_distribution.existing_distribution) == 0 ? 1 : 0
+
   origin {
     domain_name = local.bucket.bucket_regional_domain_name # Update to access the bucket via index
     origin_id   = "S3-${local.bucket_name}-bucket"
