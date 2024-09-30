@@ -2,17 +2,22 @@ data "aws_s3_bucket" "existing_bucket" {
   bucket = "${local.bucket_name}-bucket"
 }
 
-# This block defines a null resource that checks for existing CloudFront distributions
+# Use a local-exec provisioner to store the output in a file
 resource "null_resource" "check_existing_distribution" {
   provisioner "local-exec" {
     command = <<EOT
-      aws cloudfront list-distributions --query "DistributionList.Items[?Origin[0].DomainName=='${data.aws_s3_bucket.existing_bucket.bucket_regional_domain_name}'].Id" --output text
+      aws cloudfront list-distributions --query "DistributionList.Items[?Origin[0].DomainName=='${data.aws_s3_bucket.existing_bucket.bucket_regional_domain_name}'].Id" --output text > distribution_id.txt || echo "" > distribution_id.txt
     EOT
   }
 
   triggers = {
     bucket_name = data.aws_s3_bucket.existing_bucket.id
   }
+}
+
+# Read the distribution ID from the file
+data "local_file" "distribution_id" {
+  filename = "${path.module}/distribution_id.txt"
 }
 
 resource "aws_s3_bucket" "react_website" {
@@ -35,12 +40,12 @@ resource "aws_s3_object" "react_files" {
 }
 
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
-  count   = length(trimspace(null_resource.check_existing_distribution.*.id)) == 0 ? 1 : 0
+  count   = length(trimspace(data.local_file.distribution_id.content)) == 0 ? 1 : 0
   comment = "OAI for ${local.app_name}"
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
-  count = length(trimspace(null_resource.check_existing_distribution.*.id)) == 0 ? 1 : 0
+  count = length(trimspace(data.local_file.distribution_id.content)) == 0 ? 1 : 0
 
   origin {
     domain_name = local.bucket.bucket_regional_domain_name
@@ -92,6 +97,6 @@ output "bucket_name" {
 }
 
 output "cloudfront_id" {
-  value      = length(trimspace(null_resource.check_existing_distribution.*.id)) > 0 ? trimspace(null_resource.check_existing_distribution.*.id)[0] : aws_cloudfront_distribution.cdn[0].id
+  value      = length(trimspace(data.local_file.distribution_id.content)) > 0 ? trimspace(data.local_file.distribution_id.content) : aws_cloudfront_distribution.cdn[0].id
   depends_on = [aws_cloudfront_distribution.cdn]
 }
