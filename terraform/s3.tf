@@ -2,6 +2,10 @@ data "aws_s3_bucket" "existing_bucket" {
   bucket = "${local.bucket_name}-bucket"
 }
 
+data "aws_cloudfront_distribution" "existing_distribution" {
+  id = "E3SYRWPUCCVQ74"
+}
+
 resource "aws_s3_bucket" "react_website" {
   count  = length(data.aws_s3_bucket.existing_bucket) == 0 ? 1 : 0
   bucket = "${local.bucket_name}-bucket"
@@ -10,6 +14,8 @@ resource "aws_s3_bucket" "react_website" {
 locals {
   bucket = length(aws_s3_bucket.react_website) > 0 ? aws_s3_bucket.react_website[0] : data.aws_s3_bucket.existing_bucket
 }
+
+
 
 resource "aws_s3_object" "react_files" {
   for_each = fileset("${path.module}/build", "**")
@@ -76,6 +82,6 @@ output "bucket_name" {
 }
 
 output "cloudfront_id" {
-  value      = aws_cloudfront_distribution.cdn.id
+  value      = length(aws_cloudfront_distribution.cdn) > 0 ? aws_cloudfront_distribution.cdn.id : data.aws_cloudfront_distribution.existing_distribution.id
   depends_on = [aws_cloudfront_distribution.cdn]
 }
