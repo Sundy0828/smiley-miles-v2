@@ -101,6 +101,23 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Run tests
+        run: pnpm test
+
+  codecov:
+    runs-on: ubuntu-latest
+    needs: [build, tests]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Run tests with coverage
         run: pnpm test:ci
 
