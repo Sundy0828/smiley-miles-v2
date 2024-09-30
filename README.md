@@ -1,7 +1,7 @@
 # Smiley Miles V2
 
 [![Codecov](https://codecov.io/gh/Sundy0828/smiley-miles-v2/branch/master/graph/badge.svg)](https://codecov.io/gh/Sundy0828/smiley-miles-v2)
-[![Build Status](https://img.shields.io/travis/Sundy0828/smiley-miles-v2/master.svg)](https://travis-ci.org/Sundy0828/smiley-miles-v2)
+[![Build Status](https://github.com/Sundy0828/smiley-miles-v2/actions/workflows/ci.yml/badge.svg)](https://github.com/Sundy0828/smiley-miles-v2/actions)
 
 Welcome to the Smiley Miles V2 project! This is a React application designed for [brief description of your project].
 
@@ -67,6 +67,66 @@ Infracost is used to estimate the costs associated with your infrastructure as c
    ```bash
    INFRACOST_API_KEY="{your_api_key}" infracost breakdown --path ./path/to/terraform/directory
    ```
+
+## Pipeline Setup
+To set up a continuous integration/continuous deployment (CI/CD) pipeline, follow these steps:
+
+1. Select Your CI/CD Tool: Choose a CI/CD service (e.g., Travis CI, GitHub Actions, CircleCI).
+
+2. Create a Configuration File: Depending on your selected service, create a configuration file (e.g., .travis.yml for Travis CI, .github/workflows/main.yml for GitHub Actions).
+
+3. Define the Build Steps: Include build and test steps in the configuration file to automate your deployment process.
+
+4. Connect to Your Repository: Make sure your pipeline is connected to your GitHub repository to automatically trigger builds on push or pull requests.
+
+## Codecove Token Setup
+To enable code coverage reporting with Codecov, follow these steps:
+
+1. Obtain Your Codecov Token:
+
+  - Go to your Codecov dashboard.
+  - Navigate to your project settings.
+  - Find the "Codecov Token" in the settings page.
+
+2. Add the Token to GitHub Secrets:
+
+  - Go to your GitHub repository.
+  - Navigate to Settings > Secrets and variables > Actions.
+  - Click New repository secret.
+  - Enter CODECOV_TOKEN as the name and paste your token as the value.
+
+3. Update Your CI/CD Configuration: Ensure your CI/CD configuration includes a step to upload coverage reports to Codecov, typically using:
+
+```bash
+bash <(curl -s https://codecov.io/bash)
+```
+
+## AWS IAM User Creation
+To create an AWS IAM user with permissions to perform CRUD operations on S3 buckets and CloudFront distributions, follow these steps:
+
+1. Sign in to the AWS Management Console.
+
+2. Navigate to IAM:
+
+  - Choose Users from the sidebar.
+  - Click Add user.
+
+3. Configure User Details:
+
+  - Enter a user name.
+  - Select Programmatic access for Access type.
+
+4. Set Permissions:
+
+  - Choose Attach existing policies directly.
+  - Search for and select the AmazonS3FullAccess policy for S3 access.
+  - Search for and select the CloudFrontFullAccess policy for CloudFront access.
+  - Alternatively, create a custom policy if you need more specific permissions.
+
+5. Complete User Creation:
+
+  - Review your selections and click Create user.
+  - Copy the Access Key ID and Secret Access Key for later use.
 
 ## Contributing
 
