@@ -2,6 +2,9 @@ data "aws_s3_bucket" "existing_bucket" {
   bucket = "${local.bucket_name}-bucket"
 }
 
+# Data source to get all CloudFront distributions
+data "aws_cloudfront_distributions" "all" {}
+
 resource "aws_s3_bucket" "react_website" {
   count  = length(data.aws_s3_bucket.existing_bucket) == 0 ? 1 : 0
   bucket = "${local.bucket_name}-bucket"
@@ -11,38 +14,39 @@ locals {
   bucket = length(aws_s3_bucket.react_website) > 0 ? aws_s3_bucket.react_website[0] : data.aws_s3_bucket.existing_bucket
 }
 
-
-data "aws_cloudfront_distributions" "all" {}
+# Check if any existing CloudFront distribution points to the S3 bucket
 locals {
-  existing_distribution_id = [
-    for distribution in data.aws_cloudfront_distributions.all.ids : distribution
-    if contains(data.aws_cloudfront_distributions.all.items[distribution].origin, "${local.bucket.bucket_regional_domain_name}")
-  ][0]
+  existing_distribution = [
+    for d in data.aws_cloudfront_distributions.all.items : d.id if d.origin[0].domain_name == local.bucket.bucket_regional_domain_name
+  ]
 }
 
 resource "aws_s3_object" "react_files" {
   for_each = fileset("${path.module}/build", "**")
 
-  bucket       = local.bucket.id # Update to access the bucket via index
+  bucket       = local.bucket.id
   key          = each.key
   source       = "${path.module}/build/${each.key}"
   etag         = filemd5("${path.module}/build/${each.key}")
   content_type = lookup(local.mime_types, each.key, "application/octet-stream")
 }
 
+# Only create the CloudFront origin access identity if no existing distribution is found
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
+  count   = length(local.existing_distribution) == 0 ? 1 : 0
   comment = "OAI for ${local.app_name}"
 }
 
+# Only create the CloudFront distribution if no existing distribution is found
 resource "aws_cloudfront_distribution" "cdn" {
-  count = local.existing_distribution_id != "" ? 0 : 1
+  count = length(local.existing_distribution) == 0 ? 1 : 0
 
   origin {
-    domain_name = local.bucket.bucket_regional_domain_name # Update to access the bucket via index
+    domain_name = local.bucket.bucket_regional_domain_name
     origin_id   = "S3-${local.bucket_name}-bucket"
 
     s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
+      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity[0].cloudfront_access_identity_path
     }
   }
 
@@ -87,6 +91,6 @@ output "bucket_name" {
 }
 
 output "cloudfront_id" {
-  value      = aws_cloudfront_distribution.cdn.id
+  value      = length(local.existing_distribution) > 0 ? local.existing_distribution[0] : aws_cloudfront_distribution.cdn[0].id
   depends_on = [aws_cloudfront_distribution.cdn]
 }

@@ -63,10 +63,6 @@ jobs:
         with:
           terraform_version: 1.5.0 # Specify your Terraform version here
 
-      - name: Configure AWS Credentials
-        run: |
-          echo "AWS credentials configured."
-
       - name: Terraform Init
         working-directory: ./terraform
         run: terraform init
