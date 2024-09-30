@@ -84,6 +84,6 @@ output "bucket_name" {
 }
 
 output "cloudfront_id" {
-  value      = length(aws_cloudfront_distribution.cdn) > 0 ? aws_cloudfront_distribution.cdn.id : data.aws_cloudfront_distribution.existing_distribution.id
+  value      = length(aws_cloudfront_distribution.cdn) > 0 ? aws_cloudfront_distribution.cdn[0].id : data.aws_cloudfront_distribution.existing_distribution.id
   depends_on = [aws_cloudfront_distribution.cdn]
 }
