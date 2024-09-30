@@ -136,8 +136,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9' # You can specify a specific version, e.g., '3.9'
+
+      - name: Install AWS CLI
+        run: pip install awscli
+
+      - name: Check Build Directory
+        run: ls -la ./build
+
       - name: Deploy React build to S3
         run: |
-          aws s3 sync ./build s3://smiley-miles-bucket --delete
-          aws cloudfront create-invalidation --distribution-id E3SYRWPUCCVQ74 --paths "/*"
+          aws s3 sync ./build s3://smiley-miles-bucket --delete --debug
+          aws cloudfront create-invalidation --distribution-id E3SYRWPUCCVQ74 --paths "/*" --debug
 
