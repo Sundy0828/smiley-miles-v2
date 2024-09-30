@@ -2,24 +2,6 @@ data "aws_s3_bucket" "existing_bucket" {
   bucket = "${local.bucket_name}-bucket"
 }
 
-# Use a local-exec provisioner to store the output in a file
-resource "null_resource" "check_existing_distribution" {
-  provisioner "local-exec" {
-    command = <<EOT
-      aws cloudfront list-distributions --query "DistributionList.Items[?Origin[0].DomainName=='${data.aws_s3_bucket.existing_bucket.bucket_regional_domain_name}'].Id" --output text > distribution_id.txt || echo "" > distribution_id.txt
-    EOT
-  }
-
-  triggers = {
-    bucket_name = data.aws_s3_bucket.existing_bucket.id
-  }
-}
-
-# Read the distribution ID from the file
-data "local_file" "distribution_id" {
-  filename = "${path.module}/distribution_id.txt"
-}
-
 resource "aws_s3_bucket" "react_website" {
   count  = length(data.aws_s3_bucket.existing_bucket) == 0 ? 1 : 0
   bucket = "${local.bucket_name}-bucket"
@@ -32,7 +14,7 @@ locals {
 resource "aws_s3_object" "react_files" {
   for_each = fileset("${path.module}/build", "**")
 
-  bucket       = local.bucket.id
+  bucket       = local.bucket.id # Update to access the bucket via index
   key          = each.key
   source       = "${path.module}/build/${each.key}"
   etag         = filemd5("${path.module}/build/${each.key}")
@@ -40,19 +22,16 @@ resource "aws_s3_object" "react_files" {
 }
 
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
-  count   = length(trimspace(data.local_file.distribution_id.content)) == 0 ? 1 : 0
   comment = "OAI for ${local.app_name}"
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
-  count = length(trimspace(data.local_file.distribution_id.content)) == 0 ? 1 : 0
-
   origin {
-    domain_name = local.bucket.bucket_regional_domain_name
+    domain_name = local.bucket.bucket_regional_domain_name # Update to access the bucket via index
     origin_id   = "S3-${local.bucket_name}-bucket"
 
     s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity[0].cloudfront_access_identity_path
+      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
     }
   }
 
@@ -97,6 +76,6 @@ output "bucket_name" {
 }
 
 output "cloudfront_id" {
-  value      = length(trimspace(data.local_file.distribution_id.content)) > 0 ? trimspace(data.local_file.distribution_id.content) : aws_cloudfront_distribution.cdn[0].id
+  value      = aws_cloudfront_distribution.cdn.id
   depends_on = [aws_cloudfront_distribution.cdn]
 }
