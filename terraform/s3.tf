@@ -11,6 +11,8 @@ locals {
   bucket = length(aws_s3_bucket.react_website) > 0 ? aws_s3_bucket.react_website[0] : data.aws_s3_bucket.existing_bucket
 }
 
+
+data "aws_cloudfront_distributions" "all" {}
 locals {
   existing_distribution_id = [
     for distribution in data.aws_cloudfront_distributions.all.ids : distribution
