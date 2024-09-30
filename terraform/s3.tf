@@ -14,7 +14,7 @@ locals {
 resource "aws_s3_object" "react_files" {
   for_each = fileset("${path.module}/build", "**")
 
-  bucket       = bucket.id # Update to access the bucket via index
+  bucket       = local.bucket.id # Update to access the bucket via index
   key          = each.key
   source       = "${path.module}/build/${each.key}"
   etag         = filemd5("${path.module}/build/${each.key}")
@@ -27,7 +27,7 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
-    domain_name = bucket.bucket_regional_domain_name # Update to access the bucket via index
+    domain_name = local.bucket.bucket_regional_domain_name # Update to access the bucket via index
     origin_id   = "S3-${local.bucket_name}-bucket"
 
     s3_origin_config {
