@@ -11,6 +11,9 @@ Welcome to the Smiley Miles V2 project! This is a React application designed for
 - [Usage](#usage)
 - [Scripts](#scripts)
 - [Infracost Setup](#infracost-setup)
+- [Pipeline Setup](#pipeline-setup)
+- [Codecov Token Setup](#codecov-token-setup)
+- [AWS IAM User Creation](#aws-iam-user-creation)
 - [Contributing](#contributing)
 - [License](#license)
 
