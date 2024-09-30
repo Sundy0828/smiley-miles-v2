@@ -11,6 +11,13 @@ locals {
   bucket = length(aws_s3_bucket.react_website) > 0 ? aws_s3_bucket.react_website[0] : data.aws_s3_bucket.existing_bucket
 }
 
+locals {
+  existing_distribution_id = [
+    for distribution in data.aws_cloudfront_distributions.all.ids : distribution
+    if contains(data.aws_cloudfront_distributions.all.items[distribution].origin, "${local.bucket.bucket_regional_domain_name}")
+  ][0]
+}
+
 resource "aws_s3_object" "react_files" {
   for_each = fileset("${path.module}/build", "**")
 
@@ -26,6 +33,8 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
+  count = local.existing_distribution_id != "" ? 0 : 1
+
   origin {
     domain_name = local.bucket.bucket_regional_domain_name # Update to access the bucket via index
     origin_id   = "S3-${local.bucket_name}-bucket"

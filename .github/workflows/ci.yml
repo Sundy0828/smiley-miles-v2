@@ -87,8 +87,10 @@ jobs:
         working-directory: ./terraform
         id: terraform_output
         run: |
-          echo "bucket_name=$(terraform output -raw bucket_name)" >> $GITHUB_ENV
-          echo "cloudfront_id=$(terraform output -raw cloudfront_id)" >> $GITHUB_ENV
+          bucket_name=$(terraform output -raw bucket_name | tr -d '"')
+          cloudfront_id=$(terraform output -raw cloudfront_id | tr -d '"')
+          echo "bucket_name=$bucket_name" >> $GITHUB_ENV
+          echo "cloudfront_id=$cloudfront_id" >> $GITHUB_ENV
 
       - name: Output Terraform State
         working-directory: ./terraform
