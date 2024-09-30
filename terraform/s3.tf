@@ -2,8 +2,18 @@ data "aws_s3_bucket" "existing_bucket" {
   bucket = "${local.bucket_name}-bucket"
 }
 
-# Data source to get all CloudFront distributions
-data "aws_cloudfront_distributions" "all" {}
+# This block defines a null resource that checks for existing CloudFront distributions
+resource "null_resource" "check_existing_distribution" {
+  provisioner "local-exec" {
+    command = <<EOT
+      aws cloudfront list-distributions --query "DistributionList.Items[?Origin[0].DomainName=='${data.aws_s3_bucket.existing_bucket.bucket_regional_domain_name}'].Id" --output text
+    EOT
+  }
+
+  triggers = {
+    bucket_name = data.aws_s3_bucket.existing_bucket.id
+  }
+}
 
 resource "aws_s3_bucket" "react_website" {
   count  = length(data.aws_s3_bucket.existing_bucket) == 0 ? 1 : 0
@@ -12,13 +22,6 @@ resource "aws_s3_bucket" "react_website" {
 
 locals {
   bucket = length(aws_s3_bucket.react_website) > 0 ? aws_s3_bucket.react_website[0] : data.aws_s3_bucket.existing_bucket
-}
-
-# Check if any existing CloudFront distribution points to the S3 bucket
-locals {
-  existing_distribution = [
-    for d in data.aws_cloudfront_distributions.all.items : d.id if d.origin[0].domain_name == local.bucket.bucket_regional_domain_name
-  ]
 }
 
 resource "aws_s3_object" "react_files" {
@@ -31,15 +34,13 @@ resource "aws_s3_object" "react_files" {
   content_type = lookup(local.mime_types, each.key, "application/octet-stream")
 }
 
-# Only create the CloudFront origin access identity if no existing distribution is found
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
-  count   = length(local.existing_distribution) == 0 ? 1 : 0
+  count   = length(trimspace(null_resource.check_existing_distribution.*.id)) == 0 ? 1 : 0
   comment = "OAI for ${local.app_name}"
 }
 
-# Only create the CloudFront distribution if no existing distribution is found
 resource "aws_cloudfront_distribution" "cdn" {
-  count = length(local.existing_distribution) == 0 ? 1 : 0
+  count = length(trimspace(null_resource.check_existing_distribution.*.id)) == 0 ? 1 : 0
 
   origin {
     domain_name = local.bucket.bucket_regional_domain_name
@@ -91,6 +92,6 @@ output "bucket_name" {
 }
 
 output "cloudfront_id" {
-  value      = length(local.existing_distribution) > 0 ? local.existing_distribution[0] : aws_cloudfront_distribution.cdn[0].id
+  value      = length(trimspace(null_resource.check_existing_distribution.*.id)) > 0 ? trimspace(null_resource.check_existing_distribution.*.id)[0] : aws_cloudfront_distribution.cdn[0].id
   depends_on = [aws_cloudfront_distribution.cdn]
 }
