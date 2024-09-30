@@ -7,10 +7,14 @@ resource "aws_s3_bucket" "react_website" {
   bucket = "${local.bucket_name}-bucket"
 }
 
+locals {
+  bucket = length(aws_s3_bucket.react_website) > 0 ? aws_s3_bucket.react_website[0] : data.aws_s3_bucket.existing_bucket
+}
+
 resource "aws_s3_object" "react_files" {
   for_each = fileset("${path.module}/build", "**")
 
-  bucket       = aws_s3_bucket.react_website[0].id # Update to access the bucket via index
+  bucket       = bucket.id # Update to access the bucket via index
   key          = each.key
   source       = "${path.module}/build/${each.key}"
   etag         = filemd5("${path.module}/build/${each.key}")
@@ -23,7 +27,7 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
-    domain_name = aws_s3_bucket.react_website[0].bucket_regional_domain_name # Update to access the bucket via index
+    domain_name = bucket.bucket_regional_domain_name # Update to access the bucket via index
     origin_id   = "S3-${local.bucket_name}-bucket"
 
     s3_origin_config {
@@ -67,7 +71,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 }
 
 output "bucket_name" {
-  value      = aws_s3_bucket.react_website[0].bucket
+  value      = local.bucket
   depends_on = [aws_s3_bucket.react_website]
 }
 
