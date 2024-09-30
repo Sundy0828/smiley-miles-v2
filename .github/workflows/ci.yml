@@ -88,7 +88,7 @@ jobs:
         id: terraform_output
         run: |
           echo "bucket_name=$(terraform output -raw bucket_name)" >> $GITHUB_ENV
-          echo "cloudfront_url=$(terraform output -raw cloudfront_url)" >> $GITHUB_ENV
+          echo "cloudfront_id=$(terraform output -raw cloudfront_id)" >> $GITHUB_ENV
 
       - name: Output Terraform State
         working-directory: ./terraform
@@ -149,5 +149,5 @@ jobs:
       - name: Deploy React build to S3
         run: |
           aws s3 sync ./build s3://$bucket_name --delete
-          aws cloudfront create-invalidation --distribution-id $cloudfront_url --paths "/*"
+          aws cloudfront create-invalidation --distribution-id $cloudfront_id --paths "/*"
 

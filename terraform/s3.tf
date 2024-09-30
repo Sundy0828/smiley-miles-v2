@@ -71,11 +71,11 @@ resource "aws_cloudfront_distribution" "cdn" {
 }
 
 output "bucket_name" {
-  value      = local.bucket
+  value      = local.bucket.bucket
   depends_on = [aws_s3_bucket.react_website]
 }
 
-output "cloudfront_url" {
-  value      = aws_cloudfront_distribution.cdn.domain_name
+output "cloudfront_id" {
+  value      = aws_cloudfront_distribution.cdn.id
   depends_on = [aws_cloudfront_distribution.cdn]
 }
